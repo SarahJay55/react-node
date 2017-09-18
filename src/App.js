@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import './reset.css';
 import './App.css';
 import axios from 'axios';
 import Packing from './component/Packing'
+import Buttons from './component/Buttons'
 
 
-// import Sunrise from './server/sunrise/'
 
 class App extends Component {
   constructor() {
@@ -13,7 +14,8 @@ class App extends Component {
       images: ["https://eoimages.gsfc.nasa.gov/images/imagerecords/76000/76244/oahu_ast_2010013_lrg.jpg", "http://i.dailymail.co.uk/i/pix/2013/09/01/article-2408442-1B900343000005DC-267_964x842.jpg", "https://eoimages.gsfc.nasa.gov/images/imagerecords/6000/6661/landsat_maui_kah_lrg.jpg", "http://www.hawaiiforvisitors.com/images/kauai/kauai-satellite-image-01-by-nasa-600x508.jpg"],
       currentImage: "",
       showImage: false,
-      packing: []
+      packing: [],
+      packingToDisplay: [],
     }
 
     this.changeImage = this.changeImage.bind(this);
@@ -22,18 +24,19 @@ class App extends Component {
   }
 
 
-  // componentDidMount() {
-  //   axios.get("http://api.sunrise-sunset/")
-  //        .then((response) => {
-  //          if (response.status === 200) {
-  //            this.setState({
-  //              sun: response.data
-  //            })
-  //          } else {
-  //            console.log('did not work')
-  //          }
-  //        })
-  // }
+  componentDidMount() {
+    axios.all([
+      axios.get("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400"),
+      axios.get("http://localhost:3000/api/sun")
+    ])
+    .then(axios.spread((sunrise, images) => {
+      this.setState({
+        sun: sunrise.data.results.sunrise,
+        sunImages: images.data
+      })
+      console.log(images)
+    }))
+  }
 
   changeImage(i) {
     this.setState({
@@ -57,14 +60,18 @@ class App extends Component {
       <div className="App">
         <h1>The Hawaiian Islands</h1>
 
+        <img className="sunimage" src={this.state.sunImages}/>
 
-        <button onClick={() => this.changeImage(0)}>Oahu</button>
+        <p>The Sunrise for Hawaii is at {this.state.sun}</p>
+
+
+        {/* <button onClick={() => this.changeImage(0)}>Oahu</button>
         <button onClick={() => this.changeImage(1)}>Hawaii</button>
         <button onClick={() => this.changeImage(2)}>Maui</button>
-        <button onClick={() => this.changeImage(3)}>Kauai</button>
+        <button onClick={() => this.changeImage(3)}>Kauai</button> */}
 
-        <img src={this.state.currentImage} alt="" height="500px" width="500px" />
-
+        <img src={this.state.currentImage} alt="" height="400px" width="400px" />
+        <Buttons changeImage={this.changeImage}/>
         <Packing packingList={this.state.packing} packingItem={this.packingItem} />
 
       </div>

@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "nodemon": "^1.12.1",
     "react": "^15.6.1",
@@ -18,7 +19,7 @@
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "Server.js",
+  "main": "server/server.js",
   "devDependencies": {},
   "keywords": [],
   "author": "",

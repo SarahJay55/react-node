@@ -1,23 +1,24 @@
-// var express = require('express')
-// var bodyParser = require('body-parser')
+var express = require('express')
+var bodyParser = require('body-parser')
+var controller = require("./controller.js")
+var cors = require("cors")
 
 
-// // const MongoClient    = require('mongodb').MongoClient;
+var app = express();
 
-// var app = express();
+app.use(cors());
 
-// app.use(bodyParser.json());
-// // app.use( express.static( './public/build' ) );
+app.use(bodyParser.json());
 
-// // var messagesBaseUrl = 'https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&callback=mycallback';
 
-// // app.post( messagesBaseUrl, messageController.create )
-// // app.get( messagesBaseUrl, Sunrise.read )
-// // app.put( `${messagesBaseUrl}/:id`, messageController.update )
-// // app.delete( `${messagesBaseUrl}/:id`, messageController.delete )
+var messagesBaseUrl = "http://localhost:3000/api/";
+
+
+app.get( "/api/sun", controller.read )
 
 
 
-// app.listen(3000, function() {
-//     console.log("Hey girl, I'm listening on 3000!")
-// })
+
+app.listen(3000, function() {
+    console.log("Hey girl, I'm listening on 3000!")
+})
