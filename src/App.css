@@ -1,0 +1,42 @@
+.App {
+  text-align: center;
+  background-image: url("./pipe-a-314510.jpg");
+  background-size: 100%;
+  height: 100vh;
+}
+
+h1 {
+  color: #fff;
+  font-family: Stencil Std, fantasy;
+  font-size: 40px;
+  margin-top: 0px;
+}
+
+button {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 13vh;
+  margin-left: 5vw;
+  height: 50px;
+  width: 110px;
+  font-size: 30px;
+  color: #fff;
+  background-color: #55a344;
+  font-family: Stencil Std, fantasy;
+}
+
+img {
+  position: relative;
+  top: -500px;
+}
+
+.packing {
+  position: inherit;
+  top: -800px;
+  float: right;
+}
+
+
+
+
